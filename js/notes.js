@@ -81,6 +81,35 @@ var Notes = {
     },true);
 
 
+          $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i", function(){
+          //   $(this).css("display", "block")
+
+            console.log($(this).data("id"));
+
+
+          //   // $("ul#notes-list.collapsible.popout").find("div.collapsible-body").css("background-color", "red");
+
+          //   // $(this).parent().next().css("background-color", "red");
+
+
+          });
+
+        // $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header", function(){
+        //     $(this).find("i").css("display","block");
+
+        //     // $(this).find("i").toggleClass("display-on");
+
+        //     // write helper function or find another way to toggle  display in jquery
+
+
+        // });
+
+
+
+
+
+
+
       // display what we have already
       if(window.localStorage.length-1){
          var notes_list = [], i, key;
@@ -125,9 +154,15 @@ var Notes = {
   displayAdd: function(note_entry){
 
     // console.log("********************************")
-    // console.log(note_entry.title);
+    // console.log(note_entry);
 
     var noteDisplay = document.createElement('li');
+    $(noteDisplay).attr("id" , "display-" + note_entry.id);
+
+    var deleteIcon = $("<i></i>");
+    $(deleteIcon).attr({"class" : "mdi-action-delete  right", "data-id" : note_entry.id})
+
+    // .css("display","none");
 
     var titleDisplay = $("<div></div>");
     $(titleDisplay).addClass("collapsible-header");
@@ -141,14 +176,16 @@ var Notes = {
 
 
 
-
    $(contentDisplay).append(contentP);
    $(titleDisplay).attr({"class" : "collapsible-header"}).html(note_entry.title);
+   $(titleDisplay).append(deleteIcon);
+
    $(noteDisplay).append(titleDisplay);
    $(noteDisplay).append(contentDisplay);
    $("ul#notes-list.collapsible.popout").append(noteDisplay);
 
    $('.collapsible').collapsible();
+
 
 
 

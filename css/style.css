@@ -4,6 +4,10 @@
   margin:5%;
 }
 
+.display-on{
+  display:block;
+}
+
 html{
   overflow-x:hidden;
 }
