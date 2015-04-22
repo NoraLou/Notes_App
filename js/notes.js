@@ -82,14 +82,13 @@ var Notes = {
 
 
           $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i", function(){
-          //   $(this).css("display", "block")
 
             console.log($(this).data("id"));
 
+            // note_entry.id = $(this).data("id");
 
-          //   // $("ul#notes-list.collapsible.popout").find("div.collapsible-body").css("background-color", "red");
+            Notes.displayRemove($(this).data("id"));
 
-          //   // $(this).parent().next().css("background-color", "red");
 
 
           });
@@ -100,6 +99,10 @@ var Notes = {
         //     // $(this).find("i").toggleClass("display-on");
 
         //     // write helper function or find another way to toggle  display in jquery
+
+            //   // $("ul#notes-list.collapsible.popout").find("div.collapsible-body").css("background-color", "red");
+
+          //   // $(this).parent().next().css("background-color", "red");
 
 
         // });
@@ -119,8 +122,8 @@ var Notes = {
            key = window.localStorage.key(i);
            if(/Notes:\d+/.test(key)){
               notes_list.push(JSON.parse(window.localStorage.getItem(key)));
-              console.log("***********************************************");
-              console.log(notes_list);
+              // console.log("***********************************************");
+              // console.log(notes_list);
            }
          }
          if(notes_list.length){
@@ -174,8 +177,6 @@ var Notes = {
     $(contentP).html(note_entry.contents);
 
 
-
-
    $(contentDisplay).append(contentP);
    $(titleDisplay).attr({"class" : "collapsible-header"}).html(note_entry.title);
    $(titleDisplay).append(deleteIcon);
@@ -187,8 +188,11 @@ var Notes = {
    $('.collapsible').collapsible();
 
 
+  },
 
 
+  displayRemove: function(id){
+    Notes.$notes_list.removeChild(document.getElementById("display-"+ id))
 
   }
 
