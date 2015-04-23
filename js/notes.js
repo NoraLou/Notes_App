@@ -175,7 +175,7 @@ var Notes = {
 
   noteRemove: function(id){
     window.localStorage.removeItem("Notes:" + id);
-    Notes.index = Notes.index -1;
+    window.localStorage.setItem("Notes:index", --Notes.index);
   },
 
 
