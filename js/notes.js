@@ -50,7 +50,11 @@ var Notes = {
 
 
     //set up save actions
-    Notes.$form.addEventListener("submit", function(event){
+    // Notes.$form.addEventListener("submit", function(event){
+
+    Notes.$button_save.addEventListener("click", function(event){
+
+
       var note_entry = {
         id: parseInt(this.id_entry.value),
         title: this.title.value,
@@ -69,6 +73,9 @@ var Notes = {
        Notes.displayEdit(note_entry);
 
      }
+
+     Notes.$form.submit();
+
      console.log(localStorage);
      //clear form
      this.reset();

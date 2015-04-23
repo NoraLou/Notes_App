@@ -16,8 +16,7 @@
         <div class = "nav-wrapper">
             <a href="#" class="">Notes</a>
             <ul class="right">
-            <li><button id = "show-form"></button></li>
-            <li><i class=></i></li>
+            <li><i id = "show-form" class="mdi-content-add-circle-outline"></i></li>
             </ul>
           </div>
       </div>
@@ -29,26 +28,36 @@
 
   <div class="form-container">
 
-    <form id="contacts-form">
-    <div class="item text">
-      <label>Title:</label>
-      <div class="field"><input type="text" name="title" /></div>
-    </div>
-    <div class="item text">
-      <label>Contents:</label>
-      <div class="field"><input type="text" name="contents" /></div>
-    </div>
+    <div class = "form-wrapper">
+      <form id="contacts-form">
 
-    <div class="button-wrapper">
-      <div class="item button">
-        <div class="field"><input type="button" id="contacts-op-discard" value="Discard" /></div>
-      </div>
-      <div class="item button button-default">
-        <div class="field"><input type="submit" id="contacts-op-save" value="Save" /></div>
-      </div>
-    </div>
-    <input type="hidden" name="id_entry" value="0" />
-  </form>
+        <div class="button-wrapper">
+
+            <input class = "red lighten-1" type="button" id="contacts-op-discard" value = "Cancel"/>
+
+            <!-- <a class "waves-effect waves-light btn blue accent-4 right small"><input class = "right" type="submit" id="contacts-op-save" value="Save"/></a> -->
+
+            <input class = "blue accent-4 right" type= "button" id="contacts-op-save" value="Save"/>
+
+        </div>
+
+
+        <div class="item text">
+          <label>Title:</label>
+          <div><input type="text" name="title" class="validate"/></div>
+        </div>
+
+        <div class="item text">
+          <label>Contents:</label>
+          <div><input type="text" name="contents" class="validate"/></div>
+        </div>
+
+
+
+        <input type="hidden" name="id_entry" value="0" />
+      </form>
+
+    </div> <!-- container -->
 
   </div><!--  form-container -->
 
