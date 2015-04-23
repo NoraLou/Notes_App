@@ -8,11 +8,9 @@ var Notes = {
 
   index: window.localStorage.getItem("Notes:index"),
   $notes_list : document.getElementById("notes-list"),
-
   $form: document.getElementById("contacts-form"),
   $button_save:document.getElementById("contacts-op-save"),
   $button_delete:document.getElementById("contacts-op-discard"),
-
   $show_form:document.getElementById("show-form"),
 
 
@@ -26,8 +24,7 @@ var Notes = {
 
     }
 
-
-    //show form
+    //intialize form display
     Notes.$show_form.addEventListener("click", function(event){
       $(".form-container").toggleClass("fullSize").promise().done(function(){
         $(".container.form-buttons>a").animate({
@@ -39,17 +36,10 @@ var Notes = {
     //set up form
     Notes.$form.reset();
 
-
-
-    //set up delete actions
+    //set up cancel actions
     Notes.$button_delete.addEventListener("click", function(event){
 
-      console.log("canceled")
-
       $(".form-container").toggleClass("fullSize");
-      // $(".container.form-buttons>a").animate({
-      //     opacity:0
-      //   });
       Notes.$form.reset();
       Notes.$form.id_entry.value = 0;
     }, true);
@@ -58,69 +48,50 @@ var Notes = {
     //set up save actions
     Notes.$form.addEventListener("submit", function(event){
 
-    // Notes.$button_save.addEventListener("click", function(event){
-
-
       var note_entry = {
         id: parseInt(this.id_entry.value),
         title: this.title.value,
         contents : this.contents.value,
       };
 
-     // alert("note saved!");
      $(".form-container").toggleClass("fullSize");
 
-     // if this is the first time it has been submitted- add it
      if(note_entry.id == 0){
        Notes.noteAdd(note_entry);
        Notes.displayAdd(note_entry);
      }else{
        Notes.noteEdit(note_entry);
        Notes.displayEdit(note_entry);
-
      }
 
-     // Notes.$form.submit();
-
-     console.log(localStorage);
      //clear form
      this.reset();
      //reset the tracking value
      this.id_entry.value = 0;
 
-
-    //TO DO!!!! toggle class to close after adding a timeout function.
-
      event.preventDefault();
     },true);
 
-
+          //set up delete event handler
           $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i.mdi-action-delete ", function(){
 
-            // console.log($(this).data("id"));
             Notes.displayRemove($(this).data("id"));
             Notes.noteRemove($(this).data("id"))
-
           });
 
+          //set up edit event handler
           $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i.mdi-content-create", function(){
 
-            console.log($(this).data("id"));
-
             var edit_entry = JSON.parse(window.localStorage.getItem("Notes:"+ $(this).data("id")));
-
-            console.log(edit_entry);
 
             Notes.$form.title.value = edit_entry.title
             Notes.$form.contents.value = edit_entry.contents
             Notes.$form.id_entry.value = edit_entry.id
 
-
             $(".form-container").addClass("fullSize");
             $(".form-container").find("div.input-field").find("label").addClass("active");
 
             Notes.$form.focus();
-            // Notes.$form.active();
 
           });
 
@@ -131,20 +102,14 @@ var Notes = {
 
          });
 
-
-
-
-      // display what we have already
+      //initialize display from localstorage
       if(window.localStorage.length-1){
          var notes_list = [], i, key;
          for(i = 0; i < window.localStorage.length; i++){
 
-           // console.log(key);
            key = window.localStorage.key(i);
            if(/Notes:\d+/.test(key)){
               notes_list.push(JSON.parse(window.localStorage.getItem(key)));
-              // console.log("***********************************************");
-              // console.log(notes_list);
            }
          }
          if(notes_list.length){
@@ -156,16 +121,12 @@ var Notes = {
 
 
   noteAdd: function(note_entry){
-    //start at our index in the list
     note_entry.id = Notes.index
-    // add and increment index by one
     window.localStorage.setItem("Notes:index", ++Notes.index);
-    // and the new key and data-array to our notes object
     window.localStorage.setItem("Notes:" + note_entry.id, JSON.stringify(note_entry));
     },
 
   noteEdit: function(note_entry){
-    //grab already indexed key set its content changes
     window.localStorage.setItem("Notes:" + note_entry.id, JSON.stringify(note_entry));
   },
 
@@ -174,12 +135,7 @@ var Notes = {
     window.localStorage.setItem("Notes:index", --Notes.index);
   },
 
-
-
   displayAdd: function(note_entry){
-
-    // console.log("********************************")
-    // console.log(note_entry);
 
     var noteDisplay = document.createElement('li');
     $(noteDisplay).attr("id" , "display-" + note_entry.id);
@@ -214,7 +170,6 @@ var Notes = {
 
    $('.collapsible').collapsible();
 
-
   },
 
   displayEdit: function(note_entry){
@@ -229,11 +184,9 @@ var Notes = {
     $(editIcon).attr({"class" : "mdi-content-create  right", "data-id": note_entry.id })
      .css("display","none");
 
-
     $(textEdit).find("div.collapsible-header").html(note_entry.title ).append(deleteIcon).append(editIcon);
 
     $(textEdit).find("div.collapsible-body").html("<p>" + note_entry.contents + "</p>");
-
 
   },
 

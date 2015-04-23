@@ -34,6 +34,12 @@ nav{
   z-index: 5;
 }
 
+.logo{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size:16px;
+}
+
 nav ul li .mdi-content-add-circle-outline{
   font-size: 40px;
   padding:0;
@@ -85,9 +91,6 @@ nav ul li .mdi-content-add-circle-outline{
   height: 100% !important;
   width: 100% !important;
 }
-
-
-
 
 
 footer{
