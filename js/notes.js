@@ -50,9 +50,9 @@ var Notes = {
 
 
     //set up save actions
-    // Notes.$form.addEventListener("submit", function(event){
+    Notes.$form.addEventListener("submit", function(event){
 
-    Notes.$button_save.addEventListener("click", function(event){
+    // Notes.$button_save.addEventListener("click", function(event){
 
 
       var note_entry = {
