@@ -89,6 +89,8 @@ var Notes = {
 
             Notes.displayRemove($(this).data("id"));
 
+            Notes.noteRemove($(this).data("id"))
+
 
 
           });
@@ -148,8 +150,8 @@ var Notes = {
     window.localStorage.setItem("Notes:" + note_entry.id, JSON.stringify(note_entry));
   },
 
-  noteRemove: function(note_entry){
-    window.localStorage.removeItem("Notes:" + entry.id);
+  noteRemove: function(id){
+    window.localStorage.removeItem("Notes:" + id);
   },
 
 
