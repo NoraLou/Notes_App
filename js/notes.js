@@ -9,7 +9,6 @@ var Notes = {
   index: window.localStorage.getItem("Notes:index"),
   $notes_list : document.getElementById("notes-list"),
 
-  /// adjusting contacts
   $form: document.getElementById("contacts-form"),
   $button_save:document.getElementById("contacts-op-save"),
   $button_delete:document.getElementById("contacts-op-discard"),
@@ -18,26 +17,12 @@ var Notes = {
 
 
   init: function(){
-    //get items from localStorage
     if(!Notes.index){
       window.localStorage.setItem("Notes:index", Notes.index = 1);
     }
 
     if(Notes.index == 1){
-
      Materialize.toast("Click the 'plus' icon to add some notes", 4000, "red accent-2");
-
-      // note = document.createElement("li");
-      // note.innerHTML = "<h1>Looks like there are no notes. Add some!</h1>";
-      // Notes.$notes_list.appendChild(note)
-
-      // $(note).animate({
-      //   $(note).hide();
-      // })
-
-
-      // $(note).hide()
-
 
     }
 
