@@ -23,6 +23,25 @@ var Notes = {
       window.localStorage.setItem("Notes:index", Notes.index = 1);
     }
 
+    if(Notes.index == 1){
+
+     Materialize.toast("Click the 'plus' icon to add some notes", 4000, "red accent-2");
+
+      // note = document.createElement("li");
+      // note.innerHTML = "<h1>Looks like there are no notes. Add some!</h1>";
+      // Notes.$notes_list.appendChild(note)
+
+      // $(note).animate({
+      //   $(note).hide();
+      // })
+
+
+      // $(note).hide()
+
+
+    }
+
+
     //show form
     Notes.$show_form.addEventListener("click", function(event){
       $(".form-container").toggleClass("fullSize").promise().done(function(){
@@ -39,6 +58,8 @@ var Notes = {
 
     //set up delete actions
     Notes.$button_delete.addEventListener("click", function(event){
+
+      console.log("canceled")
 
       $(".form-container").toggleClass("fullSize");
       // $(".container.form-buttons>a").animate({
@@ -61,7 +82,7 @@ var Notes = {
         contents : this.contents.value,
       };
 
-     alert("note saved!");
+     // alert("note saved!");
      $(".form-container").toggleClass("fullSize");
 
      // if this is the first time it has been submitted- add it
@@ -74,7 +95,7 @@ var Notes = {
 
      }
 
-     Notes.$form.submit();
+     // Notes.$form.submit();
 
      console.log(localStorage);
      //clear form
@@ -111,29 +132,19 @@ var Notes = {
 
 
             $(".form-container").addClass("fullSize");
+            $(".form-container").find("div.input-field").find("label").addClass("active");
 
             Notes.$form.focus();
+            // Notes.$form.active();
 
           });
 
 
+          //display options to edit and delete only when entire note is visible
+        $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header", function(){
+            $(this).find("i").toggle();
 
-        // $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header", function(){
-        //     $(this).find("i").css("display","block");
-
-        //     // $(this).find("i").toggleClass("display-on");
-
-        //     // write helper function or find another way to toggle  display in jquery
-
-            //   // $("ul#notes-list.collapsible.popout").find("div.collapsible-body").css("background-color", "red");
-
-          //   // $(this).parent().next().css("background-color", "red");
-
-
-        // });
-
-
-
+         });
 
 
 
@@ -143,7 +154,7 @@ var Notes = {
          var notes_list = [], i, key;
          for(i = 0; i < window.localStorage.length; i++){
 
-           console.log(key);
+           // console.log(key);
            key = window.localStorage.key(i);
            if(/Notes:\d+/.test(key)){
               notes_list.push(JSON.parse(window.localStorage.getItem(key)));
@@ -190,10 +201,11 @@ var Notes = {
 
     var deleteIcon = $("<i></i>");
     $(deleteIcon).attr({"class" : "mdi-action-delete  right", "data-id" : note_entry.id})
-    // .css("display","none");
+    .css("display","none");
 
     var editIcon = $("<i></i>");
     $(editIcon).attr({"class" : "mdi-content-create  right", "data-id": note_entry.id })
+    .css("display","none");
 
     var titleDisplay = $("<div></div>");
     $(titleDisplay).addClass("collapsible-header");
@@ -226,10 +238,11 @@ var Notes = {
 
     var deleteIcon = $("<i></i>");
     $(deleteIcon).attr({"class" : "mdi-action-delete  right", "data-id" : note_entry.id})
-    // .css("display","none");
+    .css("display","none");
 
     var editIcon = $("<i></i>");
     $(editIcon).attr({"class" : "mdi-content-create  right", "data-id": note_entry.id })
+     .css("display","none");
 
 
     $(textEdit).find("div.collapsible-header").html(note_entry.title ).append(deleteIcon).append(editIcon);
