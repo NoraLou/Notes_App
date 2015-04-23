@@ -66,7 +66,8 @@ var Notes = {
        Notes.displayAdd(note_entry);
      }else{
        Notes.noteEdit(note_entry);
-      // edit disply
+       Notes.displayEdit(note_entry);
+
      }
      console.log(localStorage);
      //clear form
@@ -99,6 +100,8 @@ var Notes = {
 
             Notes.$form.title.value = edit_entry.title
             Notes.$form.contents.value = edit_entry.contents
+            Notes.$form.id_entry.value = edit_entry.id
+
 
             $(".form-container").addClass("fullSize");
 
@@ -207,6 +210,27 @@ var Notes = {
    $("ul#notes-list.collapsible.popout").append(noteDisplay);
 
    $('.collapsible').collapsible();
+
+
+  },
+
+  displayEdit: function(note_entry){
+
+    var textEdit = document.getElementById("display-" + note_entry.id);
+
+    console.log(textEdit);
+    $(textEdit).css("background-color" , "yellow");
+
+    $(textEdit).find("div.collapsible-header").css("background-color", "red");
+
+    console.log(note_entry.title);
+    console.log(note_entry.contents);
+
+    $(textEdit).find("div.collapsible-header").html(note_entry.title );
+    $(textEdit).find("div.collapsible-body").html("<p>" + note_entry.contents + "</p>");
+
+    // we have to append the icons again??? after replaceing inner html
+
 
 
   },
