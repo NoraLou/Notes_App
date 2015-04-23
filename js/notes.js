@@ -197,7 +197,6 @@ var Notes = {
     var contentP = $("<p></p>")
     $(contentP).html(note_entry.contents);
 
-
    $(contentDisplay).append(contentP);
    $(titleDisplay).attr({"class" : "collapsible-header"}).html(note_entry.title);
 
@@ -218,19 +217,17 @@ var Notes = {
 
     var textEdit = document.getElementById("display-" + note_entry.id);
 
-    console.log(textEdit);
-    $(textEdit).css("background-color" , "yellow");
+    var deleteIcon = $("<i></i>");
+    $(deleteIcon).attr({"class" : "mdi-action-delete  right", "data-id" : note_entry.id})
+    // .css("display","none");
 
-    $(textEdit).find("div.collapsible-header").css("background-color", "red");
+    var editIcon = $("<i></i>");
+    $(editIcon).attr({"class" : "mdi-content-create  right", "data-id": note_entry.id })
 
-    console.log(note_entry.title);
-    console.log(note_entry.contents);
 
-    $(textEdit).find("div.collapsible-header").html(note_entry.title );
+    $(textEdit).find("div.collapsible-header").html(note_entry.title ).append(deleteIcon).append(editIcon);
+
     $(textEdit).find("div.collapsible-body").html("<p>" + note_entry.contents + "</p>");
-
-    // we have to append the icons again??? after replaceing inner html
-
 
 
   },
