@@ -56,7 +56,7 @@ var Notes = {
         title: this.title.value,
         contents : this.contents.value,
       };
-     console.log(note_entry)
+
      alert("note saved!");
      $(".form-container").toggleClass("fullSize");
 
@@ -81,19 +81,32 @@ var Notes = {
     },true);
 
 
-          $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i", function(){
+          $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i.mdi-action-delete ", function(){
+
+            // console.log($(this).data("id"));
+            Notes.displayRemove($(this).data("id"));
+            Notes.noteRemove($(this).data("id"))
+
+          });
+
+          $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header>i.mdi-content-create", function(){
 
             console.log($(this).data("id"));
 
-            // note_entry.id = $(this).data("id");
+            var edit_entry = JSON.parse(window.localStorage.getItem("Notes:"+ $(this).data("id")));
 
-            Notes.displayRemove($(this).data("id"));
+            console.log(edit_entry);
 
-            Notes.noteRemove($(this).data("id"))
+            Notes.$form.title.value = edit_entry.title
+            Notes.$form.contents.value = edit_entry.contents
 
+            $(".form-container").addClass("fullSize");
 
+            Notes.$form.focus();
 
           });
+
+
 
         // $("ul#notes-list.collapsible.popout").on("click","div.collapsible-header", function(){
         //     $(this).find("i").css("display","block");
@@ -152,6 +165,7 @@ var Notes = {
 
   noteRemove: function(id){
     window.localStorage.removeItem("Notes:" + id);
+    Notes.index = Notes.index -1;
   },
 
 
@@ -166,8 +180,10 @@ var Notes = {
 
     var deleteIcon = $("<i></i>");
     $(deleteIcon).attr({"class" : "mdi-action-delete  right", "data-id" : note_entry.id})
-
     // .css("display","none");
+
+    var editIcon = $("<i></i>");
+    $(editIcon).attr({"class" : "mdi-content-create  right", "data-id": note_entry.id })
 
     var titleDisplay = $("<div></div>");
     $(titleDisplay).addClass("collapsible-header");
@@ -181,7 +197,10 @@ var Notes = {
 
    $(contentDisplay).append(contentP);
    $(titleDisplay).attr({"class" : "collapsible-header"}).html(note_entry.title);
+
    $(titleDisplay).append(deleteIcon);
+
+   $(titleDisplay).append(editIcon);
 
    $(noteDisplay).append(titleDisplay);
    $(noteDisplay).append(contentDisplay);
